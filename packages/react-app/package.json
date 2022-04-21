@@ -1,7 +1,7 @@
 {
   "name": "@my-app/react-app",
   "version": "1.0.0",
-  "homepage": "https://ljsherlock.github.io/proof-of-magician-eth",
+  "homepage": ".",
   "browserslist": {
     "production": [
       ">0.2%",
