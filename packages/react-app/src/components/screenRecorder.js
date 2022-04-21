@@ -1,5 +1,8 @@
 import React from 'react'
 import { screenRecord } from "../utilities/screenRecord";
+import { ReactComponent as OrbSVG } from '../assets/orb.svg'
+
+import './animation'
 
 class ScreenRecorder extends React.Component {
 
@@ -63,13 +66,48 @@ class ScreenRecorder extends React.Component {
     console.log('chunks', this.chunks)
 
     return (
-      <div>
-        <video src={this.url} />
+       <div className="main">
+          <div className="orb">
+            <div className="row">
+              <div className='image-orb'>
+                <OrbSVG/>
+        
+                <div className="white-circle">
+                </div>
+        
+                <div id="box">
+                  <span id="boxText"></span>
+                </div>
+        
+              </div>
+            </div>
+        
+            <div className="row buttons-row">
+              <div id="box2">
+                <span id="box2Text"></span>
+            </div>
+              <div className="start">
+                <button id="start" onClick={() => this.handleStart()}>Start</button>
+              </div>
+              <div className="stop">
+                <button id="stop" onClick={() => this.handleStop()}>Stop</button>
+              </div>
+            </div>
+            <div className="status">
+              <div className="color-match-msg"></div>
+              <div className='message'>Use your mind to match the color of the background to the orb.</div>
+            </div>
+          </div>
 
-        <button onClick={() => this.handleStart()}>Start Recording</button>
-        <button onClick={() => this.handleStop()}>Stop Recording</button>
+          <div className="pop_up">
+            <div className='message2'></div>
+            <div className='message3'></div>
 
-      </div>
+            <div style={{display: 'none'}} className="videoPlayer">
+              <video className="video" width="600px" controls></video>
+            </div>
+          </div>
+        </div>  
     );
   }
 }

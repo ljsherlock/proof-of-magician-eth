@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/proof-of-magician-eth/static/css/main.697671ac.chunk.css",
+    "main.js": "/proof-of-magician-eth/static/js/main.50122338.chunk.js",
+    "main.js.map": "/proof-of-magician-eth/static/js/main.50122338.chunk.js.map",
+    "runtime-main.js": "/proof-of-magician-eth/static/js/runtime-main.ba39b6cf.js",
+    "runtime-main.js.map": "/proof-of-magician-eth/static/js/runtime-main.ba39b6cf.js.map",
+    "static/js/2.e82c20fd.chunk.js": "/proof-of-magician-eth/static/js/2.e82c20fd.chunk.js",
+    "static/js/2.e82c20fd.chunk.js.map": "/proof-of-magician-eth/static/js/2.e82c20fd.chunk.js.map",
+    "index.html": "/proof-of-magician-eth/index.html",
+    "static/css/main.697671ac.chunk.css.map": "/proof-of-magician-eth/static/css/main.697671ac.chunk.css.map",
+    "static/js/2.e82c20fd.chunk.js.LICENSE.txt": "/proof-of-magician-eth/static/js/2.e82c20fd.chunk.js.LICENSE.txt",
+    "static/media/orb.d5708091.svg": "/proof-of-magician-eth/static/media/orb.d5708091.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ba39b6cf.js",
+    "static/js/2.e82c20fd.chunk.js",
+    "static/css/main.697671ac.chunk.css",
+    "static/js/main.50122338.chunk.js"
+  ]
+}

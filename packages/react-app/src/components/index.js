@@ -1,5 +1,36 @@
 import styled from "styled-components";
 
+export const ColorOrb = styled.div`
+  z-index: 1;
+  height: 165.77px;
+  width: 165.77px;
+  border-radius: 100%;
+  background-color: rgb(255,255,255 );
+  text-align: center;
+  color: white;
+  font-size: 23px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -109px;
+  position: absolute;
+  top: -117px;
+  bottom: 0;
+  left: -3px;
+  margin: auto;
+  right: 0;
+`
+export const BackgroundWithColor = styled.div`
+  position: absolute;
+  top: 0;
+  z-index: -1;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items:center;
+  justify-content: center;
+`
+
 export const Body = styled.div`
   align-items: center;
   color: white;
@@ -24,7 +55,6 @@ export const Button = styled.button`
 `;
 
 export const Container = styled.div`
-  background-color: #282c34;
   display: flex;
   flex-direction: column;
   height: calc(100vh);

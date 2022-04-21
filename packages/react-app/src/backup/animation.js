@@ -1,0 +1,210 @@
+
+import React from 'react'
+import { ReactComponent as OrbSVG } from '../assets//orb.svg'
+import { ColorOrb, BackgroundWithColor } from "."
+
+const el = document.getElementById('box'); // your element
+var startBtn = document.getElementById("start")
+var stopBtn = document.getElementById("stop")
+var box2 = document.querySelector("body")
+// document.querySelector('.orb').style.display = 'none';    
+let consecutiveColors = [];
+const property = 'background-color';       // fading property
+var seconds = 0;
+var fadeDuration = 5000;
+var timerStatus;
+
+
+const randomNumber = function(limit) {
+  return Math.floor(Math.random() * limit);
+}
+// return objet of random RGB values
+const randomRGBGenerator = function() {
+  return {
+      r: randomNumber(255),
+      g: randomNumber(255),
+      b: randomNumber(255)
+  };
+}
+
+const sameColor = function(color1, color2) {
+  return color1 === color2
+}
+
+const randomDuration = function() {
+  var min = 1, max = 5;
+  var number = Math.floor(Math.random() * (max - min + 1) + min);
+  return number * 1000;
+}
+
+function getRGB(str){
+  var match = str.match(/rgba?\((\d{1,3}), ?(\d{1,3}), ?(\d{1,3})\)?(?:, ?(\d(?:\.\d?))\))?/);
+  return match ? [
+      parseInt(match[1]),
+      parseInt(match[2]),
+      parseInt(match[3])
+    ] : {};
+}
+
+function rgb2lab(rgb){
+  var r = rgb[0] / 255,
+      g = rgb[1] / 255,
+      b = rgb[2] / 255,
+      x, y, z;
+
+  r = (r > 0.04045) ? Math.pow((r + 0.055) / 1.055, 2.4) : r / 12.92;
+  g = (g > 0.04045) ? Math.pow((g + 0.055) / 1.055, 2.4) : g / 12.92;
+  b = (b > 0.04045) ? Math.pow((b + 0.055) / 1.055, 2.4) : b / 12.92;
+  
+    x = (r * 0.4124 + g * 0.3576 + b * 0.1805) / 0.95047;
+    y = (r * 0.2126 + g * 0.7152 + b * 0.0722) / 1.00000;
+    z = (r * 0.0193 + g * 0.1192 + b * 0.9505) / 1.08883;
+  
+    x = (x > 0.008856) ? Math.pow(x, 1/3) : (7.787 * x) + 16/116;
+    y = (y > 0.008856) ? Math.pow(y, 1/3) : (7.787 * y) + 16/116;
+    z = (z > 0.008856) ? Math.pow(z, 1/3) : (7.787 * z) + 16/116;
+  
+    return [(116 * y) - 16, 500 * (x - y), 200 * (y - z)]
+  }
+
+function deltaE(labA, labB){
+  var deltaL = labA[0] - labB[0];
+  var deltaA = labA[1] - labB[1];
+  var deltaB = labA[2] - labB[2];
+  var c1 = Math.sqrt(labA[1] * labA[1] + labA[2] * labA[2]);
+  var c2 = Math.sqrt(labB[1] * labB[1] + labB[2] * labB[2]);
+  var deltaC = c1 - c2;
+  var deltaH = deltaA * deltaA + deltaB * deltaB - deltaC * deltaC;
+  deltaH = deltaH < 0 ? 0 : Math.sqrt(deltaH);
+  var sc = 1.0 + 0.045 * c1;
+  var sh = 1.0 + 0.015 * c1;
+  var deltaLKlsl = deltaL / (1.0);
+  var deltaCkcsc = deltaC / (sc);
+  var deltaHkhsh = deltaH / (sh);
+  var i = deltaLKlsl * deltaLKlsl + deltaCkcsc * deltaCkcsc + deltaHkhsh * deltaHkhsh;
+  return i < 0 ? 0 : Math.sqrt(i);
+}
+
+export class StartRandomColorTest extends React.Component {
+  state = {
+    targetColorRGB: null,
+    currentColorRGB: null
+  }
+
+  construct() {
+    const { started } = this.props
+     if(started === false) {
+      const targetColor = randomRGBGenerator();
+      this.setState({
+        targetColorRGB: 'rgb('+targetColor.r+','+targetColor.g+','+targetColor.b+')'
+      });
+    }
+  }
+
+  render() {
+    const { handleStopRecording, started } = this.props;
+    const { currentColorRGB, targetColorRGB } = this.state;
+    let randomRGB = randomRGBGenerator();
+
+    this.setState({
+      currentColorRGB: 'rgb('+randomRGB.r+','+randomRGB.g+','+randomRGB.b+')'
+    });
+
+    // STYLE CHANGE
+    if(currentColorRGB && targetColorRGB) {
+      var rangecolor =  deltaE(rgb2lab(getRGB(currentColorRGB)) , rgb2lab(getRGB(targetColorRGB)));
+      fadeDuration = randomDuration();
+      seconds +=  fadeDuration / 1000;
+      
+      if (rangecolor >= 0 && rangecolor <= 20){
+        
+        // handleStopRecording();  
+        // STATE UPDATE
+  
+        // $(".message2").text(`Congratulations! ${seconds} seconds. Colour match 
+        //   within range qualifying for Proof of Magician status.`);
+        //   $(".message3").text('Download and send us this video to get your Proof of Magician NFT. ');
+        //   stopTimer()
+        //   $("#box").fadeIn();
+        //   hideOrb();
+        //   return false
+  
+        // STATE CHANGE
+      }
+    }
+
+    // - [ ] this is where the color should fade to white.
+    // set to white after 2500ms
+    setTimeout(function() {
+        this.setState({
+          currentColorRGB: 'rgb(255, 255, 255)'
+        });
+    }, 2500)
+
+    // if (sameColor(consecutiveColors[0], randomRGB)) {
+    //     consecutiveColors.push(randomRGB);
+    // } else {
+    //     consecutiveColors = [randomRGB];
+    // }
+  
+
+    // $("#box").fadeIn(fadeDuration / 2);
+    // $("#box").fadeOut(fadeDuration / 2);
+
+    timerStatus = setTimeout(StartRandomColorTest, fadeDuration)     
+    
+    return (
+      <div class="orb">
+        <div class="row">
+          <div class='image-orb'>
+
+            <OrbSVG/>
+
+            <div class="white-circle">
+            </div>
+
+            <ColorOrb id='box1' style={{backgroundColor:currentColorRGB}} />
+
+          </div>
+        </div>
+
+        <div class="row buttons-row">
+
+          <BackgroundWithColor id='box2' style={{backgroundColor:targetColorRGB}} />
+          <div>
+            {/* <video src={this.url} /> */}
+          </div>
+          <div class="start">
+            <button id="start" onClick={() => this.handleStart()}>Start</button>
+          </div>
+          <div class="stop">
+            <button id="stop" onClick={() => this.handleStop()} disabled="disabled">Stop</button>
+          </div>
+        </div>
+        <div class="status">
+          <div class="color-match-msg"></div>
+          <div class='message'>Use your mind to match the color of the background to the orb.</div>
+        </div>
+      </div>
+    )
+  }
+ 
+}
+
+// const stopTimer = function()
+// {   
+//     startBtn.removeAttribute("disabled");
+//     stopBtn.removeAttribute("enabled");
+//     stopBtn.setAttribute("disabled", "disabled");
+//     startBtn.setAttribute("enabled", "enabled");
+//     clearInterval(timerStatus)        
+// }
+
+// startBtn.addEventListener("click", function() {
+//     stopBtn.removeAttribute("disabled");
+//     startBtn.removeAttribute("enabled");
+//     startBtn.setAttribute("disabled", "disabled");
+//     stopBtn.setAttribute("enabled", "enabled");
+// });
+
+// stopBtn.addEventListener("click", stopTimer);

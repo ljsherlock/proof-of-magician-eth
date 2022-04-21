@@ -1,0 +1,142 @@
+.image-orb {
+  display: flex;
+  position: relative;
+}
+
+.videoPlayer {
+  display: flex;
+  justify-content: center;
+}
+
+.white-circle {
+  z-index: 0;
+  height: 165.77px;
+  width: 165.77px;
+  border-radius: 100%;
+  background-color: rgb(255,255,255 );
+  text-align: center;
+  color: white;
+  font-size: 23px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -109px;
+  position: absolute;
+  top: -117px;
+  bottom: 0;
+  left: -3px;
+  margin: auto;
+  right: 0;
+}
+
+#box{
+  z-index: 1;
+  height: 165.77px;
+  width: 165.77px;
+  border-radius: 100%;
+  background-color: rgb(255,255,255 );
+  text-align: center;
+  color: white;
+  font-size: 23px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -109px;
+  position: absolute;
+  top: -117px;
+  bottom: 0;
+  left: -3px;
+  margin: auto;
+  right: 0;
+}
+#box2 {
+  position: absolute;
+  top: 0;
+  z-index: -1;
+  /* padding: 40px 0; */
+  /* font-size: 20px; */
+  /* border-radius: 100px; */
+  height: 100vh;
+  width: 100vw;
+  /* border-radius: 100%; */
+  /* text-align: center; */
+  /* color: white; */
+  /* font-size: 48px; */
+  display: flex;
+  align-items:center;
+  justify-content: center;
+  /* margin-left:50px; */
+  /* opacity: 1;
+  transition: opacity 5s;  */
+}
+
+svg {
+  fill:white;
+}
+
+.message, .message2, .message3 {
+  color: white;
+  font-family: monospace;
+  font-size: 1em;
+  margin: 1em auto;
+  max-width: 800px;
+  line-height: 1.5;
+  text-align: center;
+
+}
+
+#box.fade {
+  opacity: 0;
+}
+
+.color-match-msg {
+  color: white;
+  font-size: 1.5em
+}
+
+#box2.fade {
+  opacity: 0;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+.buttons-row {
+  justify-content: center;  
+  align-items: center; 
+}
+.buttons-row button {
+  padding: 40px 0;
+  font-size: 20px;
+  border-radius: 100px;
+  width: 110px;
+}
+
+button:disabled,
+button[disabled]{
+border: 1px solid #999999;
+background-color: #cccccc;
+color: #666666;
+}
+.stop {
+  margin-left: 10px;
+}
+.status {
+  text-align: center;
+}
+.seconds {
+  font-size: 20px;
+}
+
+.box-bg {
+  background-image: url(bg.png);
+  background-size: cover;
+  width: 50%;
+  height: 560px;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

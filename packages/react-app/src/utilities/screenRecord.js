@@ -6,7 +6,7 @@ export class screenRecord {
   url;
   startRecording;
   stopRecording;
-  mediaRecorder
+  mediaRecorder;
   
   constructor() {
     this.chunks = [];
@@ -24,7 +24,9 @@ export class screenRecord {
     number,
     mintToken,
     send,
-    ipfsResultObj
+    ipfsResultObj,
+    startRandomColorTest,
+    handleStopRecording
   ) {  ;
 
     this.setState({
@@ -48,7 +50,10 @@ export class screenRecord {
       chunks.push(e.data)
     }
 
+    window.startTimer();
+
     console.log('recording');
+
     console.log('this.mediaRecorder', this.mediaRecorder);
     // possible callback function.
   
@@ -57,6 +62,13 @@ export class screenRecord {
           // type: chunks[0].type
           type: 'video/webm',
       })
+      let url = URL.createObjectURL(blob)
+
+      let video = document.querySelector("video")
+      let videoWrapper = document.querySelector('.videoPlayer');
+      video.src = url
+      videoWrapper.style.display = "";
+      video.play();
 
       console.log(blob)
 
