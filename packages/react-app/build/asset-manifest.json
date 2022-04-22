@@ -1,21 +1,22 @@
 {
   "files": {
     "main.css": "/static/css/main.697671ac.chunk.css",
-    "main.js": "/static/js/main.d0096e6d.chunk.js",
-    "main.js.map": "/static/js/main.d0096e6d.chunk.js.map",
+    "main.js": "/static/js/main.c8616405.chunk.js",
+    "main.js.map": "/static/js/main.c8616405.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.e8c1013d.js",
     "runtime-main.js.map": "/static/js/runtime-main.e8c1013d.js.map",
-    "static/js/2.579f07df.chunk.js": "/static/js/2.579f07df.chunk.js",
-    "static/js/2.579f07df.chunk.js.map": "/static/js/2.579f07df.chunk.js.map",
+    "static/js/2.43c68006.chunk.js": "/static/js/2.43c68006.chunk.js",
+    "static/js/2.43c68006.chunk.js.map": "/static/js/2.43c68006.chunk.js.map",
     "index.html": "/index.html",
     "static/css/main.697671ac.chunk.css.map": "/static/css/main.697671ac.chunk.css.map",
-    "static/js/2.579f07df.chunk.js.LICENSE.txt": "/static/js/2.579f07df.chunk.js.LICENSE.txt",
+    "static/js/2.43c68006.chunk.js.LICENSE.txt": "/static/js/2.43c68006.chunk.js.LICENSE.txt",
+    "static/media/emblem.3acd9834.svg": "/static/media/emblem.3acd9834.svg",
     "static/media/orb.d5708091.svg": "/static/media/orb.d5708091.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.e8c1013d.js",
-    "static/js/2.579f07df.chunk.js",
+    "static/js/2.43c68006.chunk.js",
     "static/css/main.697671ac.chunk.css",
-    "static/js/main.d0096e6d.chunk.js"
+    "static/js/main.c8616405.chunk.js"
   ]
 }
