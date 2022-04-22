@@ -1,8 +1,11 @@
 import React from 'react'
 import { screenRecord } from "../utilities/screenRecord";
 import { ReactComponent as OrbSVG } from '../assets/orb.svg'
+import { ReactComponent as Emblem } from '../assets/emblem.svg'
+import $ from 'jquery'
 
 import './animation'
+import { NoticeBar, NoticeBar2, NoticeBarContainer, NoticeButton } from '.';
 
 class ScreenRecorder extends React.Component {
 
@@ -24,6 +27,18 @@ class ScreenRecorder extends React.Component {
     this.url = this.recorder.url;
     this.startRecording = this.recorder.startRecording;
     this.stopRecording = this.recorder.stopRecording;
+  }
+
+  constructor() {
+    super();
+    this.handleStop = this.handleStop.bind(this);
+    window.handleStop = this.handleStop;
+    $(document).on('keyup', function(e) {
+      if (e.key === "Escape") { // escape key maps to keycode `27`
+        // stopTimer();
+        window.handleStop();
+      }
+    });
   }
 
   getBlob() {
@@ -64,6 +79,8 @@ class ScreenRecorder extends React.Component {
 
   render() {
     console.log('chunks', this.chunks)
+    const { ipfsResultObj } = this.props;
+    const etherscanURI = `https://rinkeby.etherscan.io/token/0x51c449b5fd5dee173658546b993bd1680fc61a02?a=${1}`
 
     return (
        <div className="main">
@@ -85,18 +102,22 @@ class ScreenRecorder extends React.Component {
             <div className="row buttons-row">
               <div id="box2">
                 <span id="box2Text"></span>
-            </div>
-              <div className="start">
+              </div>
+              {/* <div className="start">
                 <button id="start" onClick={() => this.handleStart()}>Start</button>
               </div>
               <div className="stop">
                 <button id="stop" onClick={() => this.handleStop()}>Stop</button>
-              </div>
+              </div> */}
             </div>
-            <div className="status">
+            {/* <div className="status">
               <div className="color-match-msg"></div>
               <div className='message'>Use your mind to match the color of the background to the orb.</div>
-            </div>
+            </div> */}
+            <NoticeBarContainer id='noticeBarContainer'>
+              <NoticeBar>Use your mind to match the color of the background to the orb.</NoticeBar>
+              <NoticeBar2>{`Press`}<NoticeButton id="start" onClick={() => this.handleStart()}>Start</NoticeButton>{`to begin.`}</NoticeBar2>
+            </NoticeBarContainer>
           </div>
 
           <div className="pop_up">
@@ -104,7 +125,14 @@ class ScreenRecorder extends React.Component {
             <div className='message3'></div>
 
             <div style={{display: 'none'}} className="videoPlayer">
-              <video className="video" width="600px" controls></video>
+              <video className="video" width="600px" controls="" src="" style={{pointerEvents: 'none'}} autoPlay="" playsInline="" loop=""></video>
+              <div className='nft-section'>
+                <Emblem className='nft-emblem' />
+                <p className='nft-title'>Proof of Magician</p>
+                <p className='nft-token-id'>#0006</p>
+                <p>View on <a href={etherscanURI}>Etherscan</a></p>
+                <p>View on<a href={ipfsResultObj !== undefined ? ipfsResultObj.metadataURI : ''}>IPFS</a></p>
+              </div>
             </div>
           </div>
         </div>  

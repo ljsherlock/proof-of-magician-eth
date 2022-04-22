@@ -32,10 +32,10 @@ $(() => {
   
   var timerStatus;
   var startBtn = document.getElementById("start")
-  var stopBtn = document.getElementById("stop")
+//   var stopBtn = document.getElementById("stop")
   
   startBtn.setAttribute("enabled", "enabled");
-  stopBtn.setAttribute("disabled", "disabled");
+//   stopBtn.setAttribute("disabled", "disabled");
   var sec = document.querySelector('.seconds')
   
   // $("#box").fadeOut();
@@ -129,10 +129,10 @@ $(() => {
         seconds +=  fadeDuration / 1000;
         
         if (rangecolor >= 0 && rangecolor <= 20){
-          stopRecording();  
+            stopRecording();  
              $(".message2").text(`Congratulations! ${seconds} seconds. Colour match 
             within range qualifying for Proof of Magician status.`);
-            $(".message3").text('Download and send us this video to get your Proof of Magician NFT. ');
+            $(".message3").text('This is your NFT access key to the Miracle Network. ');
             stopTimer()
             $("#box").fadeIn();
             hideOrb();
@@ -174,23 +174,28 @@ $(() => {
         hideOrb();
         $(".message2").text(`Congratulations! ${seconds} seconds. Colour match 
         within range qualifying for Proof of Magician status.`);
-        $(".message3").text('Download and send us this video to get your Proof of Magician NFT. ');
+        $(".message3").text('This is your NFT access key to the Miracle Network.');
         stopTimer()
         $("#box").fadeIn();
         startBtn.removeAttribute("disabled");
-        stopBtn.removeAttribute("enabled");
-        stopBtn.setAttribute("disabled", "disabled");
+        // stopBtn.removeAttribute("enabled");
+        // stopBtn.setAttribute("disabled", "disabled");
         startBtn.setAttribute("enabled", "enabled");
         clearInterval(timerStatus)        
     }
     
     startBtn.addEventListener("click", function() {
-        stopBtn.removeAttribute("disabled");
+        // stopBtn.removeAttribute("disabled");
+        document.querySelector('#noticeBarContainer').style.display = 'none';
         startBtn.removeAttribute("enabled");
         startBtn.setAttribute("disabled", "disabled");
-        stopBtn.setAttribute("enabled", "enabled");
+        // stopBtn.setAttribute("enabled", "enabled");
     });
-    
-    stopBtn.addEventListener("click", stopTimer);
-  
+
+    document.addEventListener('keyup', function (e) {
+        console.log('Event fired');
+        if (e.key === "Escape") {
+            stopTimer();
+        }
+      })
 });

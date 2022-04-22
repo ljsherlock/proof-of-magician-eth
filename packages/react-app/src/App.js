@@ -6,10 +6,11 @@ import axios from 'axios'
 
 import { addresses, abis } from "@my-app/contracts";
 import ScreenRecorder from "./components/screenRecorder";
-import { Body, Button, Container, Header, Image, Link } from "./components";
+import { Body, Button, Container, Header, BrandingContainer, Link } from "./components";
 import connect from '@aragon/connect'
 import connectTokens from '@aragon/connect-tokens'
 import { create, IPFSHTTPClient } from 'ipfs-http-client'
+import { ReactComponent as Emblem } from './assets/emblem.svg'
 
 import {
   ensureIpfsUriPrefix,
@@ -87,6 +88,7 @@ class ProofofMagician extends React.Component {
     this.state = {
       ipfsResultObj: {},
       minted: false,
+      contract: new Contract(addresses.ceaErc20, abis.erc20)
     }
     daoNetwork();
   }
@@ -102,6 +104,12 @@ class ProofofMagician extends React.Component {
         account,
         metadataURI
       )
+      console.log(this.state)
+
+      // const tokenId = await this.state.contract.mintToken(
+      //   account,
+      //   metadataURI
+      // )
       console.log('tokenId', tokenId)
       
       return tokenId
@@ -178,14 +186,14 @@ class ProofofMagician extends React.Component {
     
     let that = this;
 
-    this.clientSideCalltoIPFS(blob, account).then(function (response) {
+    this.clientSideCalltoIPFS(blob, account).then(async function (response) {
       //handle success
-      console.log(response);
+      console.log('ipfsResultObj 1', response);
       that.setState({
         ipfsResultObj: response.data
       });
 
-      const tokenID = mintToken(response.metadataURI, account, send);
+      const tokenID = await mintToken(response.metadataURI, account, send);
       console.log(`Token minted. TokenId = ${tokenID}`)
     })
     .catch(function (response) {
@@ -216,29 +224,38 @@ class ProofofMagician extends React.Component {
   
   render() {
     const { ipfsResultObj } = this.state;
-    console.log('changed')
+    console.log('ipfsResultObj', ipfsResultObj )
 
     return (
-      <App ipfsResultObj={ipfsResultObj} addBlobToIPFS={this.addBlobToIPFS} mintToken={this.mintToken} />
+      <App 
+        ipfsResultObj={ipfsResultObj} 
+        addBlobToIPFS={this.addBlobToIPFS} 
+        mintToken={this.mintToken} 
+        contract={this.state.contract}   
+      />
     )
   }
 }
 
-function App({ ipfsResultObj, addBlobToIPFS, mintToken }) {
+function App({ ipfsResultObj, addBlobToIPFS, mintToken, contract }) {
   const { account } = useEthers();
 
-  const contract = new Contract(addresses.ceaErc20, abis.erc20);
   console.log('contract', contract)
 
-  const { send } = useContractFunction(
+  const { send, state } = useContractFunction(
     contract,
     "mintToken"
   )
 
+  console.log('mintToken state',state)
+
   return (
     <Container>
       <Header>
-      <h1>Proof of Magician</h1>
+        <BrandingContainer>
+          <Emblem/>
+          <p>Proof of Magician</p>
+        </BrandingContainer>
         <WalletButton />
       </Header>
       <Body>
