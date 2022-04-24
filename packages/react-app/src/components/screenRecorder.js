@@ -132,6 +132,7 @@ class ScreenRecorder extends React.Component {
                 <p className='nft-token-id'>#0006</p>
                 <p>View on <a href={etherscanURI}>Etherscan</a></p>
                 <p>View on<a href={ipfsResultObj !== undefined ? ipfsResultObj.metadataURI : ''}>IPFS</a></p>
+                <p>Visit the<a href="https://miraclenetwork.io/">Miracle Network DAO</a></p>
               </div>
             </div>
           </div>
